@@ -30,4 +30,4 @@ CREATE TABLE IF NOT EXISTS nodes (
 ,node_pulled     INTEGER
 
 ,UNIQUE(node_name)
-);
+) ROW_FORMAT=DYNAMIC;

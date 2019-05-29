@@ -188,15 +188,15 @@ var migrationTableCreate = `
 CREATE TABLE IF NOT EXISTS migrations (
  name VARCHAR(255)
 ,UNIQUE(name)
-)
+) ROW_FORMAT=DYNAMIC;
 `
 
 var migrationInsert = `
-INSERT INTO migrations (name) VALUES (?)
+INSERT INTO migrations (name) VALUES (?);
 `
 
 var migrationSelect = `
-SELECT name FROM migrations
+SELECT name FROM migrations;
 `
 
 //
@@ -223,7 +223,7 @@ CREATE TABLE IF NOT EXISTS users (
 ,user_hash          VARCHAR(500)
 ,UNIQUE(user_login)
 ,UNIQUE(user_hash)
-);
+) ROW_FORMAT=DYNAMIC;
 `
 
 //
@@ -259,7 +259,7 @@ CREATE TABLE IF NOT EXISTS repos (
 ,repo_secret                VARCHAR(50)
 ,UNIQUE(repo_slug)
 ,UNIQUE(repo_uid)
-);
+) ROW_FORMAT=DYNAMIC;
 `
 
 var alterTableReposAddColumnNoFork = `
@@ -285,7 +285,7 @@ CREATE TABLE IF NOT EXISTS perms (
 ,perm_created  INTEGER
 ,perm_updated  INTEGER
 ,PRIMARY KEY(perm_user_id, perm_repo_uid)
-);
+) ROW_FORMAT=DYNAMIC;
 `
 
 var createIndexPermsUser = `
@@ -335,7 +335,7 @@ CREATE TABLE IF NOT EXISTS builds (
 ,build_updated       INTEGER
 ,build_version       INTEGER
 ,UNIQUE(build_repo_id, build_number)
-);
+) ROW_FORMAT=DYNAMIC;
 `
 
 var createIndexBuildsRepo = `
@@ -387,7 +387,7 @@ CREATE TABLE IF NOT EXISTS stages (
 ,stage_depends_on  TEXT
 ,stage_labels      TEXT
 ,UNIQUE(stage_build_id, stage_number)
-);
+) ROW_FORMAT=DYNAMIC;
 `
 
 var createIndexStagesBuild = `
@@ -397,7 +397,7 @@ CREATE INDEX ix_stages_build ON stages (stage_build_id);
 var createTableUnfinished = `
 CREATE TABLE IF NOT EXISTS stages_unfinished (
 stage_id INTEGER PRIMARY KEY
-);
+) ROW_FORMAT=DYNAMIC;
 `
 
 var createTriggerStageInsert = `
@@ -440,7 +440,7 @@ CREATE TABLE IF NOT EXISTS steps (
 ,step_stopped     INTEGER
 ,step_version     INTEGER
 ,UNIQUE(step_stage_id, step_number)
-);
+) ROW_FORMAT=DYNAMIC;
 `
 
 var createIndexStepsStage = `
@@ -455,7 +455,7 @@ var createTableLogs = `
 CREATE TABLE IF NOT EXISTS logs (
  log_id    INTEGER PRIMARY KEY
 ,log_data  MEDIUMBLOB
-);
+) ROW_FORMAT=DYNAMIC;
 `
 
 //
@@ -479,7 +479,7 @@ CREATE TABLE IF NOT EXISTS cron (
 ,cron_version     INTEGER
 ,UNIQUE(cron_repo_id, cron_name)
 ,FOREIGN KEY(cron_repo_id) REFERENCES repos(repo_id) ON DELETE CASCADE
-);
+) ROW_FORMAT=DYNAMIC;
 `
 
 var createIndexCronRepo = `
@@ -504,7 +504,7 @@ CREATE TABLE IF NOT EXISTS secrets (
 ,secret_pull_request_push BOOLEAN
 ,UNIQUE(secret_repo_id, secret_name)
 ,FOREIGN KEY(secret_repo_id) REFERENCES repos(repo_id) ON DELETE CASCADE
-);
+) ROW_FORMAT=DYNAMIC;
 `
 
 var createIndexSecretsRepo = `
@@ -550,7 +550,7 @@ CREATE TABLE IF NOT EXISTS nodes (
 ,node_pulled     INTEGER
 
 ,UNIQUE(node_name)
-);
+) ROW_FORMAT=DYNAMIC;
 `
 
 //
@@ -575,5 +575,5 @@ CREATE TABLE IF NOT EXISTS orgsecrets (
 ,secret_pull_request      BOOLEAN
 ,secret_pull_request_push BOOLEAN
 ,UNIQUE(secret_namespace, secret_name)
-);
+) ROW_FORMAT=DYNAMIC;
 `

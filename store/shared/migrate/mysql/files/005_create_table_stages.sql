@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS stages (
 ,stage_depends_on  TEXT
 ,stage_labels      TEXT
 ,UNIQUE(stage_build_id, stage_number)
-);
+) ROW_FORMAT=DYNAMIC;
 
 -- name: create-index-stages-build
 
@@ -38,7 +38,7 @@ CREATE INDEX ix_stages_build ON stages (stage_build_id);
 
 CREATE TABLE IF NOT EXISTS stages_unfinished (
 stage_id INTEGER PRIMARY KEY
-);
+) ROW_FORMAT=DYNAMIC;
 
 -- name: create-trigger-stage-insert
 

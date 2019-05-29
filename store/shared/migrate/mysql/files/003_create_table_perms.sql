@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS perms (
 ,PRIMARY KEY(perm_user_id, perm_repo_uid)
 --,FOREIGN KEY(perm_user_id) REFERENCES users(user_id) ON DELETE CASCADE
 --,FOREIGN KEY(perm_repo_id) REFERENCES repos(repo_id) ON DELETE CASCADE
-);
+) ROW_FORMAT=DYNAMIC;
 
 -- name: create-index-perms-user
 

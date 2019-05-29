@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS repos (
 ,repo_secret                VARCHAR(50)
 ,UNIQUE(repo_slug)
 ,UNIQUE(repo_uid)
-);
+) ROW_FORMAT=DYNAMIC;
 
 -- name: alter-table-repos-add-column-no-fork
 

@@ -34,8 +34,7 @@ CREATE TABLE IF NOT EXISTS builds (
 ,build_updated       INTEGER
 ,build_version       INTEGER
 ,UNIQUE(build_repo_id, build_number)
---,FOREIGN KEY(build_repo_id) REFERENCES repos(repo_id) ON DELETE CASCADE
-);
+) ROW_FORMAT=DYNAMIC;
 
 -- name: create-index-builds-repo
 

@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS cron (
 ,cron_version     INTEGER
 ,UNIQUE(cron_repo_id, cron_name)
 ,FOREIGN KEY(cron_repo_id) REFERENCES repos(repo_id) ON DELETE CASCADE
-);
+) ROW_FORMAT=DYNAMIC;
 
 -- name: create-index-cron-repo
 

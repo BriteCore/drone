@@ -19,4 +19,4 @@ CREATE TABLE IF NOT EXISTS users (
 ,user_hash          VARCHAR(500)
 ,UNIQUE(user_login)
 ,UNIQUE(user_hash)
-);
+) ROW_FORMAT=DYNAMIC;

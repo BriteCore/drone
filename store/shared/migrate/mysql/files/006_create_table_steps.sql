@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS steps (
 ,step_stopped     INTEGER
 ,step_version     INTEGER
 ,UNIQUE(step_stage_id, step_number)
-);
+) ROW_FORMAT=DYNAMIC;
 
 -- name: create-index-steps-stage
 

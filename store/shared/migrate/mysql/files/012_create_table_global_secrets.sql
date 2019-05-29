@@ -9,4 +9,4 @@ CREATE TABLE IF NOT EXISTS orgsecrets (
 ,secret_pull_request      BOOLEAN
 ,secret_pull_request_push BOOLEAN
 ,UNIQUE(secret_namespace, secret_name)
-);
+) ROW_FORMAT=DYNAMIC;
